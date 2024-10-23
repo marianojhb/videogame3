@@ -5,7 +5,7 @@ int main()
 {
     // Inicialización de la ventana
     sf::RenderWindow window (sf::VideoMode(800,600), "Mi primer Videojuego xD");
-    window.setFramerateLimit(60);
+    window.setFramerateLimit(120);
 
     Personaje sonic;
 

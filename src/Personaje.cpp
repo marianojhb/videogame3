@@ -3,46 +3,56 @@
 
 Personaje::Personaje()
 {
+   _velocity = {4,4};
    _texture.loadFromFile("assets/sprites/sonic.png"); // Creo el primer personaje
    _sprite.setTexture(_texture);
-   _velocity = {4,4};
+   _sprite.setOrigin(_sprite.getGlobalBounds().width/2,_sprite.getGlobalBounds().height);
 }
 
 void Personaje::update()
 {
-//    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-//        _sprite.move(0,-_velocity);
-//    }
-//    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-//        _sprite.move(-_velocity,0);
-//    }
-//    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-//        _sprite.move(0,_velocity);
-//    }
-//    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-//        _sprite.move(_velocity,0);
-//    }
+    _velocity = {0,0 };
+
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        _velocity.y= -4;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
+        _velocity.x = -4;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        _velocity.y = 4;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
+        _velocity.x = 4;
+
+    }
 
     _sprite.move(_velocity);
 
+    if(_velocity.x < 0) {
+        _sprite.setScale(-1,1);
+    } else if (_velocity.x > 0) {
+        _sprite.setScale(1,1);
+    }
+
+
     // vemos en que posicion se quedo luego de cada movimiento
     // para que no se vaya de la pantalla
-    if(_sprite.getPosition().x < 0) {
-//        _sprite.setPosition(0,_sprite.getPosition().y);
-            _velocity.x = -_velocity.x * 1.01;
+    if (_sprite.getGlobalBounds().left < 0) {
+        _sprite.setPosition(_sprite.getOrigin().x, _sprite.getPosition().y);
     }
-    if(_sprite.getPosition().x > 800 - _sprite.getGlobalBounds().width) {
-//        _sprite.setPosition(800 - _sprite.getGlobalBounds().width, _sprite.getPosition().y);
-            _velocity.x = -_velocity.x * 1.01;
+    if (_sprite.getGlobalBounds().top < 0) {
+        _sprite.setPosition(_sprite.getPosition().x, _sprite.getOrigin().y);
     }
-    if(_sprite.getPosition().y > 600-_sprite.getGlobalBounds().height) {
-//        _sprite.setPosition(_sprite.getPosition().x, 600 - _sprite.getGlobalBounds().height);
-        _velocity.y = -_velocity.y * 1.01;
+
+    if (_sprite.getGlobalBounds().left + _sprite.getGlobalBounds().width > 800) {
+        _sprite.setPosition(800 - _sprite.getOrigin().x, _sprite.getPosition().y);
     }
-    if(_sprite.getPosition().y < 0) {
-//        _sprite.setPosition(_sprite.getPosition().x, 0);
-        _velocity.y = -_velocity.y * 1.01;
+    if (_sprite.getGlobalBounds().top + _sprite.getGlobalBounds().height > 600) {
+        _sprite.setPosition(_sprite.getPosition().x, 600);
     }
+
+
 
 }
 
