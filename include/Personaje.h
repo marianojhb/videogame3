@@ -5,7 +5,7 @@ class Personaje: public sf::Drawable
 {
     sf::Sprite _sprite;
     sf::Texture _texture;
-    float _velocity;
+    sf::Vector2f _velocity;
 public:
     Personaje();
     void update();
