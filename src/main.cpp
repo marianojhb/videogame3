@@ -1,13 +1,21 @@
 #include <SFML/Graphics.hpp>
+#include <cstdlib>
+#include <ctime>
 #include "../include/Personaje.h"
+#include "../include/Item.h"
 
 int main()
 {
+    // Plantamos la semilla random
+    std::srand((unsigned)std::time(0));
+
     // Inicialización de la ventana
     sf::RenderWindow window (sf::VideoMode(800,600), "Mi primer Videojuego xD");
-    window.setFramerateLimit(120);
+    window.setFramerateLimit(60);
 
     Personaje sonic;
+    Item ring;
+    ring.respawn();
 
 
     // Game Loop (update del juego)
@@ -28,6 +36,15 @@ int main()
 
         sonic.update();
 
+        if(sonic.isCollision(ring))
+        {
+            ring.respawn();
+        }
+
+        ring.update();
+
+
+
 
         // Update (actualiza los estados del juego o de los personajes)
 
@@ -36,6 +53,7 @@ int main()
 
         // Draw
         window.draw(sonic);
+        window.draw(ring);
 
         // Display - Flip
         window.display();
