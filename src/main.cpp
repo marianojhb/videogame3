@@ -40,6 +40,15 @@ int main()
 
     int sumarPuntos = 0;
 
+
+    sf::Sprite fondo;
+    sf::Texture fondo_texture;
+    fondo_texture.loadFromFile("assets/sprites/fondo.jpg");
+    fondo.setTexture(fondo_texture);
+
+
+
+
     // Game Loop (update del juego)
     while (window.isOpen())
     {
@@ -92,6 +101,7 @@ int main()
         window.clear(); // Antes de dibujar se limpia la pantalla. Para evitar que se superpongan
 
         // Draw
+        window.draw(fondo);
         window.draw(sonic);
         window.draw(ring);
         window.draw(text);
