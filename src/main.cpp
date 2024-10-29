@@ -1,4 +1,6 @@
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio/SoundBuffer.hpp>
+#include <SFML/Audio/Sound.hpp>
 #include <cstdlib>
 #include <ctime>
 #include "../include/Personaje.h"
@@ -46,6 +48,21 @@ int main()
     fondo_texture.loadFromFile("assets/sprites/fondo.jpg");
     fondo.setTexture(fondo_texture);
 
+    sf::SoundBuffer buffer;
+    buffer.loadFromFile("assets/sounds/title-theme-101soundboards.mp3");
+    sf::Sound sound;
+    sound.setBuffer(buffer);
+    sound.play();
+
+    sf::SoundBuffer ring_collect;
+    ring_collect.loadFromFile("assets/sounds/ring-collect-101soundboards.mp3");
+    sf::Sound ring_collect_sound;
+    ring_collect_sound.setBuffer(ring_collect);
+
+    sf::SoundBuffer emerald_collect;
+    emerald_collect.loadFromFile("assets/sounds/emerald-101soundboards.mp3");
+    sf::Sound emerald_collect_sound;
+    emerald_collect_sound.setBuffer(emerald_collect);
 
 
 
@@ -73,11 +90,13 @@ int main()
         if(sonic.isCollision(ring))
         {
             ring.respawn();
+            ring_collect_sound.play();
             sumarPuntos++;
         }
 
         if(timer == 0 && sonic.isCollision(power))
         {
+            emerald_collect_sound.play();
             sonic.addVelocity(2);
             timer = 60*5;
             power.respawn();
