@@ -82,6 +82,12 @@ int main()
 
         // CMD (Leer los comandos que se presionaron)
 
+
+
+
+
+
+        // Update (actualiza los estados del juego o de los personajes)
         if (timer > 0)
         {
             timer--;
@@ -90,6 +96,7 @@ int main()
         if(sonic.isCollision(ring))
         {
             ring.respawn();
+            ring_collect_sound.setPitch(.5 + (std::rand()%5 / 5.f));
             ring_collect_sound.play();
             sumarPuntos++;
         }
@@ -111,7 +118,6 @@ int main()
         timer_txt.setString(std::to_string(timer));
         timer_txt.setPosition(timer_txt.getPosition().x, 50);
 
-        // Update (actualiza los estados del juego o de los personajes)
 
         sonic.update();
         ring.update();
