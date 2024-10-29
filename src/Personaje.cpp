@@ -11,27 +11,27 @@ Personaje::Personaje()
 
 void Personaje::update()
 {
-    _velocity = {0,0 };
+    sf::Vector2f velocity = {0, 0};
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
-        _velocity.y= -4;
+        velocity.y= -_velocity.y;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Left)) {
-        _velocity.x = -4;
+        velocity.x = -_velocity.x;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
-        _velocity.y = 4;
+        velocity.y = _velocity.y;
     }
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Right)) {
-        _velocity.x = 4;
+        velocity.x = _velocity.x;
 
     }
 
-    _sprite.move(_velocity);
+    _sprite.move(velocity);
 
-    if(_velocity.x < 0) {
+    if(velocity.x < 0) {
         _sprite.setScale(-1,1);
-    } else if (_velocity.x > 0) {
+    } else if (velocity.x > 0) {
         _sprite.setScale(1,1);
     }
 
@@ -64,4 +64,15 @@ void Personaje::draw(sf::RenderTarget &target, sf::RenderStates states) const
 sf::FloatRect Personaje::getBounds() const
 {
     return _sprite.getGlobalBounds();
+}
+
+void Personaje::addVelocity(float velocity)
+{
+    _velocity.x +=  velocity;
+    _velocity.y +=  velocity;
+}
+
+sf::Vector2f Personaje::getVelocity()
+{
+    return _velocity;
 }

@@ -3,6 +3,7 @@
 #include <ctime>
 #include "../include/Personaje.h"
 #include "../include/Item.h"
+#include "../include/Power.h"
 
 int main()
 {
@@ -13,10 +14,31 @@ int main()
     sf::RenderWindow window (sf::VideoMode(800,600), "Mi primer Videojuego xD");
     window.setFramerateLimit(60);
 
+    sf::Font font;
+    font.loadFromFile("assets/fonts/MONOCOQUE.ttf");
+
+    sf::Text text;
+    text.setFont(font);
+
+    sf::Text puntos;
+    puntos.setFont(font);
+
+    sf::Text velocidad;
+    velocidad.setFont(font);
+
+    sf::Text timer_txt;
+    timer_txt.setFont(font);
+
     Personaje sonic;
     Item ring;
     ring.respawn();
 
+    Power power;
+    power.respawn();
+
+    int timer = 60*5;
+
+    int sumarPuntos = 0;
 
     // Game Loop (update del juego)
     while (window.isOpen())
@@ -34,26 +56,53 @@ int main()
 
         // CMD (Leer los comandos que se presionaron)
 
-        sonic.update();
+        if (timer > 0)
+        {
+            timer--;
+        }
 
         if(sonic.isCollision(ring))
         {
             ring.respawn();
+            sumarPuntos++;
         }
 
-        ring.update();
+        if(timer == 0 && sonic.isCollision(power))
+        {
+            sonic.addVelocity(2);
+            timer = 60*5;
+            power.respawn();
+        }
 
+        puntos.setPosition(360, 20);
+        puntos.setCharacterSize(26);
+        puntos.setString("SCORE " + std::to_string(sumarPuntos));
 
+        velocidad.setString(std::to_string(sonic.getVelocity().x));
 
+        timer_txt.setString(std::to_string(timer));
+        timer_txt.setPosition(timer_txt.getPosition().x, 50);
 
         // Update (actualiza los estados del juego o de los personajes)
 
+        sonic.update();
+        ring.update();
+//        power.update();
 
         window.clear(); // Antes de dibujar se limpia la pantalla. Para evitar que se superpongan
 
         // Draw
         window.draw(sonic);
         window.draw(ring);
+        window.draw(text);
+        window.draw(puntos);
+        window.draw(velocidad);
+        window.draw(timer_txt);
+
+        if (timer ==0)
+        {
+            window.draw(power);
+        }
 
         // Display - Flip
         window.display();
