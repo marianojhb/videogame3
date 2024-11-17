@@ -7,6 +7,7 @@ Personaje::Personaje()
    _texture.loadFromFile("assets/sprites/sonic.png"); // Creo el primer personaje
    _sprite.setTexture(_texture);
    _sprite.setOrigin(_sprite.getGlobalBounds().width/2,_sprite.getGlobalBounds().height);
+   _sprite.setPosition(400-_sprite.getOrigin().x,300-_sprite.getOrigin().y);
 }
 
 void Personaje::update()

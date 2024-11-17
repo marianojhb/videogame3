@@ -6,6 +6,7 @@
 #include "../include/Personaje.h"
 #include "../include/Item.h"
 #include "../include/Power.h"
+#include "../include/Enemy.h"
 
 int main()
 {
@@ -19,8 +20,12 @@ int main()
     sf::Font font;
     font.loadFromFile("assets/fonts/MONOCOQUE.ttf");
 
-    sf::Text text;
+    sf::Text text, vidas_text;
     text.setFont(font);
+    vidas_text.setFont(font);
+
+    vidas_text.setPosition(0, vidas_text.getGlobalBounds().height + 100);
+
 
     sf::Text puntos;
     puntos.setFont(font);
@@ -41,7 +46,11 @@ int main()
     int timer = 60*5;
 
     int sumarPuntos = 0;
+    int vidas = 3;
 
+
+    Enemy eggman;
+//    eggman.respawn();
 
     sf::Sprite fondo;
     sf::Texture fondo_texture;
@@ -52,17 +61,24 @@ int main()
     buffer.loadFromFile("assets/sounds/title-theme-101soundboards.mp3");
     sf::Sound sound;
     sound.setBuffer(buffer);
+    sound.setVolume(5.f);
     sound.play();
 
     sf::SoundBuffer ring_collect;
     ring_collect.loadFromFile("assets/sounds/ring-collect-101soundboards.mp3");
     sf::Sound ring_collect_sound;
+    ring_collect_sound.setVolume(6.f);
     ring_collect_sound.setBuffer(ring_collect);
 
     sf::SoundBuffer emerald_collect;
     emerald_collect.loadFromFile("assets/sounds/emerald-101soundboards.mp3");
     sf::Sound emerald_collect_sound;
     emerald_collect_sound.setBuffer(emerald_collect);
+
+    sf::SoundBuffer life_collision;
+    life_collision.loadFromFile("assets/sounds/death-101soundboards.mp3");
+    sf::Sound life_collision_sound;
+    life_collision_sound.setBuffer(life_collision);
 
 
 
@@ -96,7 +112,7 @@ int main()
         if(sonic.isCollision(ring))
         {
             ring.respawn();
-            ring_collect_sound.setPitch(.5 + (std::rand()%5 / 5.f));
+//            ring_collect_sound.setPitch(.5 + (std::rand()%5 / 5.f));
             ring_collect_sound.play();
             sumarPuntos++;
         }
@@ -109,19 +125,26 @@ int main()
             power.respawn();
         }
 
+        if (sonic.isCollision(eggman))
+        {
+            vidas--;
+            eggman.respawn();
+            life_collision_sound.play();
+        }
+
         puntos.setPosition(360, 20);
         puntos.setCharacterSize(26);
         puntos.setString("SCORE " + std::to_string(sumarPuntos));
+        vidas_text.setString("VIDAS " + std::to_string(vidas));
 
-        velocidad.setString(std::to_string(sonic.getVelocity().x));
+        velocidad.setString(std::to_string((int)sonic.getVelocity().x));
 
         timer_txt.setString(std::to_string(timer));
         timer_txt.setPosition(timer_txt.getPosition().x, 50);
 
-
         sonic.update();
         ring.update();
-//        power.update();
+        eggman.update();
 
         window.clear(); // Antes de dibujar se limpia la pantalla. Para evitar que se superpongan
 
@@ -130,9 +153,11 @@ int main()
         window.draw(sonic);
         window.draw(ring);
         window.draw(text);
+        window.draw(vidas_text);
         window.draw(puntos);
         window.draw(velocidad);
         window.draw(timer_txt);
+        window.draw(eggman);
 
         if (timer ==0)
         {
@@ -146,3 +171,19 @@ int main()
     // Liberación del Juego
     return 0;
 }
+
+
+
+/*
+ARMAMOS EL DISPLAY
+ARMAMOS EL LOOP
+ {
+ EVENTOS
+ CMD
+ UPDATE
+ DRAW
+ FLIP
+ LIBERACION DEL JUEGO
+ }
+
+ */
