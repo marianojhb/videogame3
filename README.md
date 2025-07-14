@@ -1,30 +1,57 @@
-# Videojuego clon-1945 v.0.3
+# Clon-1945 Video Game v0.3
 
-## Descripción
+## Description
 
-Este proyecto es un clon del famoso videojuego 1945, adaptado a 2024. Es una aplicación desarrollada en C++ utilizando la biblioteca SFML (Simple and Fast Multimedia Library). Este proyecto forma parte de la materia Programación 2 en la carrera Tecnicatura Universitaria en Programación en la UTN, Argentina, correspondiente al año 2024 y al cuatrimestre 2.
+This project is a modern adaptation of the classic **1945 vertical shooter** game, rebuilt for 2024. It is developed in **C++** using the **SFML (Simple and Fast Multimedia Library)** framework. The game recreates the iconic arcade experience with enhanced structure and updated graphics.
 
-## Integrantes del Equipo
+This project was developed as part of the **Programming II** course for the **University Technical Degree in Programming** at **UTN (Universidad Tecnológica Nacional), Argentina**, during the **second semester of 2024**.
 
-- **Carlos Zubilete**
-- **Enzo Segovia**
-- **Nicolás Sosa**
-- **Mariano Belgrano**
+---
 
-## Requisitos
+## Team Members
 
-- **C++**: Versión recomendada C++11 o superior.
-- **SFML**: Biblioteca para gráficos y multimedia en C++. Puedes instalar SFML siguiendo las instrucciones en [su sitio oficial](https://www.sfml-dev.org/download.php).
-- **CMake**: Herramienta para la gestión de proyectos en C++. Asegúrate de tener CMake 3.28 o superior.
+- Carlos Zubilete  
+- Enzo Segovia  
+- Nicolás Sosa  
+- Mariano Belgrano
 
-## Instalación
+---
 
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/marianojhb/videojuego3.git
+## Requirements
 
-## Recursos utilizados
+- **C++**: Version C++11 or higher  
+- **SFML**: Multimedia library for graphics, sound, and input  
+- **CMake**: Project build system (version 3.28 or higher)
 
-- Compiler [CMake v3.30.2](https://cmake.org/)
-- Game engine [SFML v2.6.2](https://www.sfml-dev.org/)
-- Game art en [OpenGameArt.org](https://opengameart.org "Game sprites")
+---
+
+## Installation
+
+Clone the repository to your local environment:
+
+```bash
+git clone https://github.com/marianojhb/videojuego3.git
+```
+
+Build and run the game using CMake:
+
+```bash
+cd videojuego3
+cmake .
+make
+./Clon1945
+```
+
+> ⚠️ Make sure SFML is properly installed on your system. You can follow installation instructions from the official site: [https://www.sfml-dev.org](https://www.sfml-dev.org)
+
+---
+
+## Technologies Used
+
+- **Compiler**: CMake v3.30.2  
+- **Game Engine**: SFML v2.6.2  
+- **Game Art**: Assets from [OpenGameArt.org](https://opengameart.org)
+
+---
+
+> 🎮 This project is intended for educational purposes, but it follows real-world development practices and can be extended further.
