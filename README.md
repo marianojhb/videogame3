@@ -4,7 +4,7 @@
 
 This project is a modern adaptation of the classic **1945 vertical shooter** game, rebuilt for 2024. It is developed in **C++** using the **SFML (Simple and Fast Multimedia Library)** framework. The game recreates the iconic arcade experience with enhanced structure and updated graphics.
 
-This project was developed as part of the **Programming II** course for the **University Technical Degree in Programming** at **UTN (Universidad Tecnológica Nacional), Argentina**, during the **second semester of 2024**.
+This project was developed as part of the **Programming II** course for the degree in **Computer Programming** at **UTN (Universidad Tecnológica Nacional), Argentina**, during the **second semester of 2024**.
 
 ---
 
